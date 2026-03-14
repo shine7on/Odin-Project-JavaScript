@@ -4,6 +4,11 @@
 
     </head>
     <body>
+
+        <button name="rock">Rock</button>
+        <button name="paper">Paper</button>
+        <button name="scissors">Scissors</button>
+
         <script>
             function getComputerChoice() {
                 let num = Math.floor(Math.random() * 3);
@@ -25,17 +30,8 @@
                 return choice
             }
 
+
             /*
-
-            const humanSelection = getHumanChoice();
-            const computerSelection = getComputerChoice();
-            console.log(computerSelection, humanSelection);
-
-            playRound(computerSelection, humanSelection);
-
-            */
-
-
             function playGame () {
 
                 let humanScore = 0
@@ -65,10 +61,59 @@
                     }
                 }
 
-                for (let i=0; i<5; i++) {
+                for (let i=0; i<1; i++) {
                     let humanSelection = getHumanChoice();
                     let computerSelection = getComputerChoice();
                     playRound(computerSelection, humanSelection)
+                }
+            }
+            */
+
+            
+            
+
+            function playGame () {
+
+                let humanScore = 0
+                let computerScore = 0
+
+                const buttons = document.querySelectorAll('button')
+
+                buttons.forEach(button => {
+                    button.addEventListener('click', (event) => {
+                        event.preventDefault();
+
+                        const humanChoice = button.name;
+
+                        playRound(getComputerChoice(), humanChoice)
+
+                    });
+                });
+
+                function playRound (computerChoice, humanChoice) {
+
+
+                    humanChoice = humanChoice.toLowerCase();
+
+                    let isHumanWin = 0 // -1: tie, 0: lose, 1:win
+
+                    if (computerChoice == humanChoice) {
+                        isHumanWin = -1
+                        console.log(`tie ${humanChoice}`)
+                    } else if (computerChoice == 'rock' && humanChoice == 'paper' || 
+                            computerChoice == 'paper' && humanChoice == 'scissors' ||
+                            computerChoice == 'scissors' && humanChoice == 'rock') {
+                        isHumanWin = 1;
+                        console.log(`You win! Human: ${humanChoice} beats computer: ${computerChoice}`);
+                    } else {
+                        console.log(`You lose! Computer: ${computerChoice} beats human: ${humanChoice}`);
+                    }
+
+                    if (isHumanWin == 1) {
+                        humanScore++;
+                    } else if (isHumanWin == 0) {
+                        computerScore++;
+                    }
                 }
             }
 
