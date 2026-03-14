@@ -69,13 +69,11 @@
             }
             */
 
-            
+            let humanScore = 0
+            let computerScore = 0
             
 
             function playGame () {
-
-                let humanScore = 0
-                let computerScore = 0
 
                 const buttons = document.querySelectorAll('button')
 
@@ -99,7 +97,7 @@
 
                     if (computerChoice == humanChoice) {
                         isHumanWin = -1
-                        console.log(`tie ${humanChoice}`)
+                        console.log(`tie ${humanChoice}`);
                     } else if (computerChoice == 'rock' && humanChoice == 'paper' || 
                             computerChoice == 'paper' && humanChoice == 'scissors' ||
                             computerChoice == 'scissors' && humanChoice == 'rock') {
@@ -113,6 +111,17 @@
                         humanScore++;
                     } else if (isHumanWin == 0) {
                         computerScore++;
+                    }
+                    console.log(`Human Score: ${humanScore} vs Computer Score: ${computerScore}`);
+
+                    if (humanScore >= 5) {
+                        console.log('Human win');
+                        humanScore = 0;
+                        computerScore = 0;
+                    } else if (computerScore >= 5) {
+                        console.log('Computer win');
+                        humanScore = 0;
+                        computerScore = 0;
                     }
                 }
             }
